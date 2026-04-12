@@ -124,8 +124,9 @@ function calcRank(
 ): { rank: string; score: number } {
   // 🐱 Weights and medians (adjusted from github-readme-stats)
   // Contribution-focused: commits/PRs/issues weighted higher, stars/followers lower
-  const WEIGHTS = { commits: 3, prs: 3, issues: 2, stars: 1, followers: 1 };
-  const MEDIANS = { commits: 250, prs: 40, issues: 20, stars: 50, followers: 10 };
+  // 🐱 Original github-readme-stats weights — stars weighted heavily
+  const WEIGHTS = { commits: 2, prs: 3, issues: 1, stars: 4, followers: 1 };
+  const MEDIANS = { commits: 250, prs: 50, issues: 25, stars: 50, followers: 10 };
   const TOTAL_WEIGHT = WEIGHTS.commits + WEIGHTS.prs + WEIGHTS.issues + WEIGHTS.stars + WEIGHTS.followers;
 
   // 🐱 Normalize each stat via CDF
@@ -146,6 +147,7 @@ function calcRank(
 
   // 🐱 Percentile → rank tier
   for (const t of [
+    { max: 0.5,  rank: "S+" },
     { max: 1,    rank: "S" },
     { max: 12.5, rank: "A+" },
     { max: 25,   rank: "A" },
@@ -380,7 +382,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse(o, {
       headers: {
         "Content-Type": "image/svg+xml",
-        "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+        "Cache-Control": "public, max-age=300, s-maxage=300, stale-while-revalidate=600",
       },
     });
   } catch (e) {
