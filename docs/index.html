@@ -102,7 +102,7 @@
         card.className = "card";
         card.style.background = bg[t] || "#f0f0f0";
         card.onclick = () => openModal(u, t);
-        card.innerHTML = `<span class="card-label">${t}</span><img src="https://github-stats-rho.vercel.app/api/stats?username=${u}&theme=${t}&v=${v}" alt="${t}" loading="lazy">`;
+        card.innerHTML = `<span class="card-label">${t}</span><img src="https://github-trophies-rho.vercel.app/api/stats?username=${u}&theme=${t}&v=${v}" alt="${t}" loading="lazy">`;
         grid.appendChild(card);
       });
 
@@ -113,7 +113,7 @@
 
     function openModal(u, t) {
       document.getElementById("modal-title").textContent = t;
-      document.getElementById("modal-img").src = `https://github-stats-rho.vercel.app/api/stats?username=${u}&theme=${t}&v=${Date.now()}`;
+      document.getElementById("modal-img").src = `https://github-trophies-rho.vercel.app/api/stats?username=${u}&theme=${t}&v=${Date.now()}`;
       document.getElementById("modal-md").firstChild.textContent = `![GitHub Stats](https://raw.githubusercontent.com/${u}/github-stats/main/svg/stats-${t}.svg)`;
       document.getElementById("modal-config").firstChild.textContent = JSON.stringify({ username: u }, null, 2);
       document.getElementById("overlay").classList.add("show");
