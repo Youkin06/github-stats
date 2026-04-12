@@ -147,6 +147,7 @@ function calcRank(
 
   // 🐱 Percentile → rank tier
   for (const t of [
+    { max: 0.5,  rank: "S+" },
     { max: 1,    rank: "S" },
     { max: 12.5, rank: "A+" },
     { max: 25,   rank: "A" },
@@ -381,7 +382,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse(o, {
       headers: {
         "Content-Type": "image/svg+xml",
-        "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+        "Cache-Control": "public, max-age=300, s-maxage=300, stale-while-revalidate=600",
       },
     });
   } catch (e) {
